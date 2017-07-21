@@ -13,7 +13,7 @@ jobs:
           name: Install oklog
           command: |
             go get -v github.com/oklog/oklog/cmd/oklog
-            cp /go/src/bin/oklog Docker/oklog-linux-amd64
+            cp /go/bin/oklog Docker/oklog-linux-amd64
       - setup_remote_docker
       - run:
           name: make image
