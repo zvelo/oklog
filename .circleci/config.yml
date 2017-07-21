@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Install oklog
           command: |
-            CGO_ENABLED=0 go get -v github.com/oklog/oklog/cmd/oklog
+            LDFLAGS='-extldflags "-static"' go get -v github.com/oklog/oklog/cmd/oklog
             cp /go/bin/oklog oklog-linux-amd64
       - setup_remote_docker
       - run:
