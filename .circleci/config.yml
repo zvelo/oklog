@@ -1,0 +1,26 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: /go/src/zvelo.io/oklog
+
+    docker:
+      - image: circleci/golang:latest
+
+    steps:
+      - checkout
+      - run:
+          name: Install oklog
+          command: |
+            go get -v github.com/oklog/oklog/cmd/oklog
+            cp /go/src/bin/oklog Docker/oklog-linux-amd64
+      - setup_remote_docker
+      - run:
+          name: make image
+          command: |
+            docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
+            docker build -t zvelo/oklog Docker
+      - deploy:
+          name: Push images to docker hub
+          command: |
+            docker push zvelo/oklog
