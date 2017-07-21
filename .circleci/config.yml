@@ -19,7 +19,7 @@ jobs:
           name: make image
           command: |
             docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-            docker build -t zvelo/oklog Docker
+            docker build -t zvelo/oklog .
       - deploy:
           name: Push images to docker hub
           command: |
